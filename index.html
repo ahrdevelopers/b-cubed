@@ -1,0 +1,121 @@
+<!-- 1767521437404 -->
+<!doctype html>
+<html>
+    <head>
+    <script src="./patch/_cloner-v3-40.js"></script>
+<script src="./patch/_cloner-monitor-v1-20.js?/coolmathgames=ubg69/b-cubed/"></script>
+<script src="./patch/coolmathgames/_cloner.js"></script>
+
+        <meta charset="UTF-8">
+        <title>B-CUBED</title>
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:700,900" rel="stylesheet">
+        <link href="styles/bcubed.css" rel="stylesheet">
+
+
+        <script src="./patch/google/ajax/libs/jquery/3.6.3/jquery.min.js?https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		<script type="text/javascript" src="./patch/coolmathgames/sites/default/files/cmg-ads.js?https://www.coolmathgames.com/sites/default/files/cmg-ads.js"></script>
+	
+		<script>            
+		    let isAdBreakActive = false;
+			let wasMutedMusic = false;
+			// To trigger the event Listener adBreakStart
+			document.addEventListener("adBreakStart", () => {
+				console.log("AdBreak Started")
+			    isAdBreakActive = true;
+				//TODO:  Developer needs to add the logic to pause the game and sound here
+				try {
+					wasMutedMusic = BCubed.sound.mutedMusic();
+					BCubed.sound.muteMusic(true);
+				} catch (e) {}			
+			});
+			// To trigger the event Listener  adBreakComplete
+			document.addEventListener("adBreakComplete", () => {
+				console.log("adBreak Complete")
+			    isAdBreakActive = false;
+				//TODO:  Developer needs to add the logic to resume the game and sound here
+				try {
+					if (!wasMutedMusic) BCubed.sound.muteMusic(false);
+				} catch (e) {}
+			});
+			
+			function cmgAdBreakCall() {
+				try {
+					let _cmgAdBreak = parent.cmgAdBreak ?? cmgAdBreak;
+					if (_cmgAdBreak) {
+						_cmgAdBreak();
+					} else {
+						console.warn('cmgAdBreak not foud!');
+					}
+				} catch (e) {}
+			}
+		</script>
+    </head>
+    <body style= "margin: 0px; padding: 0px; overflow: hidden;">
+
+        <div id="bcubed">
+            <div id="bcubed-start-screen"><div>
+                <p id="bcubed-site-lock">
+                    <span class="bcubed-message">This game can only be played at Coolmath-Games.com!</span>
+                    <a href="//www.coolmath-games.com/" target="_top">Play</a>
+                </p>
+                <p id="bcubed-loading">
+                    <img src="images/menu/page_loading.jpg" alt="">
+                    <span class="bcubed-loading-bar"><span id="bcubed-loading-progress"></span></span>
+                    <a href="//www.coolmath-games.com/" target="_top">Coolmath-Games.com</a>
+                </p>
+            </div></div>
+            <script>var BCubed = {'Cache': {}};</script>
+            <script src="scripts/loading.js"></script>
+
+            <p id="bcubed-stars"></p>
+
+            <div id="bcubed-game">
+                <canvas id="bcubed-scene"></canvas>
+                <p class="bcubed-game-ui">Level Time: <span id="bcubed-level-time">00:00</span></p>
+                <p class="bcubed-game-ui" id="bcubed-level-name"></p>
+                <button class="bcubed-game-ui bcubed-level-menu">Level Menu</button>
+            </div>
+
+            <div id="bcubed-menu" class="bcubed-visible">
+                <div id="bcubed-menu-scale">
+                    <div class="bcubed-page bcubed-level-won">
+                        <h1></h1>
+                        <p>Level Time: <span class="bcubed-level-won-time"></span></p>
+                        <div class="bcubed-level-completed">
+                            <p>Overall Time: <span class="bcubed-level-won-overall-time"></span></p>
+                            <p><button class="bcubed-next-level">Next Level</button></p>
+                        </div>
+                        <div class="bcubed-game-completed">
+                            <p>Final Time: <span class="bcubed-level-won-overall-time"></span></p>
+                            <p><button class="bcubed-click-here">Click Here</button></p>
+                        </div>
+                    </div>
+
+                    <div class="bcubed-page bcubed-level-list">
+                        <h1>Choose Level</h1>
+                        <ul></ul>
+                        <p><button class="bcubed-back">Back</button></p>
+                    </div>
+
+                    <div class="bcubed-page bcubed-game-won">
+                        <h1>Congratulations!</h1>
+                        <p>You have conquered every level!</p>
+                    </div>
+
+                    <p class="bcubed-page bcubed-title bcubed-visible">
+                        <button class="bcubed-start">Play</button>
+                    </p>
+                </div>
+
+                <button class="bcubed-page bcubed-game-won bcubed-back">Back</button>
+                <button class="bcubed-page bcubed-level-won bcubed-level-menu">Level Menu</button>
+            </div>
+
+            <p id="bcubed-options"><button id="bcubed-music-toggle"></button><button id="bcubed-sound-toggle"></button></p>
+        </div>
+
+        <script src="scripts/bcubed.js"></script>
+    </body>
+</html>
