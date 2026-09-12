@@ -1,121 +1,251 @@
 <!-- 1767521437404 -->
 <!doctype html>
-<html>
-    <head>
-    <script src="./patch/_cloner-v3-40.js"></script>
-<script src="./patch/_cloner-monitor-v1-20.js?/coolmathgames=ubg69/b-cubed/"></script>
-<script src="./patch/coolmathgames/_cloner.js"></script>
+<html><head>
+  <style>body,html,iframe{margin:0;padding:0;height:100%;width:100%;overflow:hidden}.forceIosScrolling{overflow:scroll;-webkit-overflow-scrolling:touch}</style>
+<script src="https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.zhTT8Br0Ho8.O/m=gapi_rpc/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-7LeULGjNQZRvhdu3G71akb6JY6A/cb=gapi.loaded_0?le=scs,fedcm_migration_mod" async=""></script><script src="https://apis.google.com/js/api.js?checkCookie=1" gapi_processed="true"></script><style></style></head>
 
-        <meta charset="UTF-8">
-        <title>B-CUBED</title>
-        <meta name="HandheldFriendly" content="true">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:700,900" rel="stylesheet">
-        <link href="styles/bcubed.css" rel="stylesheet">
+<body data-new-gr-c-s-check-loaded="14.1328.0" data-gr-ext-installed="" data-gr-agent-presence-bridge-connection-id="1789211536658-0.4944748433493876" data-new-gr-c-s-loaded="14.1328.0">
+<iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" frameborder="0" allowfullscreen="" src="https://edit.coolmathgames.com//sites/cmatgame/files/public_games/22569/" style="overflow: auto;">
+</iframe>
+
+<script>
+  let policy;
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    policy = window.trustedTypes.createPolicy('atari-gapi-loader', {
+      createScriptURL: (url) => {
+        if (url === 'https://apis.google.com/js/api.js?checkCookie=1') {
+          return url;
+        }
+        throw new Error('Attempted to load unexpected script URL');
+      }
+    });
+  }
+
+  function loadGapi() {
+    var loaderScript = document.createElement('script');
+    var url = 'https://apis.google.com/js/api.js?checkCookie=1';
+    if (policy) {
+      loaderScript.src = policy.createScriptURL(url);
+    } else {
+      loaderScript.setAttribute('src', url);
+    }
+    loaderScript.onload = function() {
+      this.onload = function() {};
+      loadGapiClient();
+    };
+    loaderScript.onreadystatechange = function() {
+      if (this.readyState === 'complete') {
+        this.onload();
+      }
+    };
+    (document.head || document.body || document.documentElement).appendChild(loaderScript);
+  }
+
+  function updateInnerFrame(url, enableInteraction, forceIosScrolling) {
+    var urlEl = document.createElement('a');
+    urlEl.setAttribute('href', url);
+    if (urlEl.protocol != "https:" && urlEl.protocol != "http:") {
+      // Do not allow updating the iframe's src to anything other than https or http (used for local
+      // servers), specifically javascript:
+      return;
+    }
+    var iframe = document.getElementById('innerFrame');
+    iframe.src = url;
+    iframe.onload = function() {
+      gapi.rpc.call('..', 'innerFrameLoaded');
+    };
+
+    if (enableInteraction) {
+      if (forceIosScrolling) {
+        var iframeParent = iframe.parentElement;
+        iframeParent.classList.add('forceIosScrolling');
+      } else {
+        iframe.style.overflow = 'auto';
+      }
+    } else {
+      iframe.style.pointerEvents = 'none';
+    }
+  }
+
+  function updateInnerIframeCode(userCode, enableInteraction, forceIosScrolling, enableHtmlSitesGenAi, isLiquidArtifact = false) {
+    if (enableHtmlSitesGenAi && isLiquidArtifact && enableInteraction) {
+      var innerFrame = document.getElementById('innerFrame');
+      if (innerFrame) {
+        innerFrame.style.pointerEvents = 'auto';
+        innerFrame.setAttribute('scrolling', 'auto');
+      }
+    }
+    gapi.rpc.setup('innerFrame');
+    gapi.rpc.call(
+      'innerFrame',
+      'updateUserHtmlFrame',
+      undefined /* opt_callback */,
+      userCode,
+      enableInteraction,
+      forceIosScrolling,
+      enableHtmlSitesGenAi,
+      isLiquidArtifact);
+  }
+
+  function onPostMessage(ev) {
+    var innerFrame = document.getElementById('innerFrame');
+    if (ev.data['magic'] != 'SHIC' && (ev.data.type != 'ATARI_GENAI_TEXT_EDIT' || !innerFrame || ev.source !== innerFrame.contentWindow)) {
+      return;
+    }
+    var type = ev.data['type'];
+    switch (type) {
+      case 'resize':
+        var height = ev.data['height'];
+        gapi.rpc.call('..', 'resize', undefined /* opt_callback */, height);
+        break;
+      case 'ATARI_GENAI_TEXT_EDIT':
+        window.parent.postMessage(ev.data, '*');
+        break;
+    }
+  }
+
+  function onGapiInitialized() {
+    // Inform the parent frame that GAPI has been initialized.
+    gapi.rpc.call('..', 'gapiInitialized');
+    gapi.rpc.register('updateInnerFrame', updateInnerFrame);
+    gapi.rpc.register('updateInnerIframeCode', updateInnerIframeCode);
+    window.addEventListener('message', onPostMessage);
+  }
+
+  function loadGapiClient() {
+    gapi.load('gapi.rpc', onGapiInitialized);
+  }
+
+  if (document.readyState == 'complete') {
+    loadGapi();
+  } else {
+    self.addEventListener('load', loadGapi);
+  }
+</script>
 
 
-        <script src="./patch/google/ajax/libs/jquery/3.6.3/jquery.min.js?https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-		<script type="text/javascript" src="./patch/coolmathgames/sites/default/files/cmg-ads.js?https://www.coolmathgames.com/sites/default/files/cmg-ads.js"></script>
-	
-		<script>            
-		    let isAdBreakActive = false;
-			let wasMutedMusic = false;
-			// To trigger the event Listener adBreakStart
-			document.addEventListener("adBreakStart", () => {
-				console.log("AdBreak Started")
-			    isAdBreakActive = true;
-				//TODO:  Developer needs to add the logic to pause the game and sound here
-				try {
-					wasMutedMusic = BCubed.sound.mutedMusic();
-					BCubed.sound.muteMusic(true);
-				} catch (e) {}			
-			});
-			// To trigger the event Listener  adBreakComplete
-			document.addEventListener("adBreakComplete", () => {
-				console.log("adBreak Complete")
-			    isAdBreakActive = false;
-				//TODO:  Developer needs to add the logic to resume the game and sound here
-				try {
-					if (!wasMutedMusic) BCubed.sound.muteMusic(false);
-				} catch (e) {}
-			});
-			
-			function cmgAdBreakCall() {
-				try {
-					let _cmgAdBreak = parent.cmgAdBreak ?? cmgAdBreak;
-					if (_cmgAdBreak) {
-						_cmgAdBreak();
-					} else {
-						console.warn('cmgAdBreak not foud!');
-					}
-				} catch (e) {}
-			}
-		</script>
-    </head>
-    <body style= "margin: 0px; padding: 0px; overflow: hidden;">
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true" style="visibility: visible !important;"></grammarly-desktop-integration></html><html><head>
+  <style>body,html,iframe{margin:0;padding:0;height:100%;width:100%;overflow:hidden}.forceIosScrolling{overflow:scroll;-webkit-overflow-scrolling:touch}</style>
+<script src="https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.zhTT8Br0Ho8.O/m=gapi_rpc/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-7LeULGjNQZRvhdu3G71akb6JY6A/cb=gapi.loaded_0?le=scs,fedcm_migration_mod" async=""></script><script src="https://apis.google.com/js/api.js?checkCookie=1" gapi_processed="true"></script><style></style></head>
 
-        <div id="bcubed">
-            <div id="bcubed-start-screen"><div>
-                <p id="bcubed-site-lock">
-                    <span class="bcubed-message">This game can only be played at Coolmath-Games.com!</span>
-                    <a href="//www.coolmath-games.com/" target="_top">Play</a>
-                </p>
-                <p id="bcubed-loading">
-                    <img src="images/menu/page_loading.jpg" alt="">
-                    <span class="bcubed-loading-bar"><span id="bcubed-loading-progress"></span></span>
-                    <a href="//www.coolmath-games.com/" target="_top">Coolmath-Games.com</a>
-                </p>
-            </div></div>
-            <script>var BCubed = {'Cache': {}};</script>
-            <script src="scripts/loading.js"></script>
+<body data-new-gr-c-s-check-loaded="14.1328.0" data-gr-ext-installed="" data-gr-agent-presence-bridge-connection-id="1789211536658-0.4944748433493876" data-new-gr-c-s-loaded="14.1328.0">
+<iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" frameborder="0" allowfullscreen="" src="https://edit.coolmathgames.com//sites/cmatgame/files/public_games/22569/" style="overflow: auto;">
+</iframe>
 
-            <p id="bcubed-stars"></p>
+<script>
+  let policy;
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    policy = window.trustedTypes.createPolicy('atari-gapi-loader', {
+      createScriptURL: (url) => {
+        if (url === 'https://apis.google.com/js/api.js?checkCookie=1') {
+          return url;
+        }
+        throw new Error('Attempted to load unexpected script URL');
+      }
+    });
+  }
 
-            <div id="bcubed-game">
-                <canvas id="bcubed-scene"></canvas>
-                <p class="bcubed-game-ui">Level Time: <span id="bcubed-level-time">00:00</span></p>
-                <p class="bcubed-game-ui" id="bcubed-level-name"></p>
-                <button class="bcubed-game-ui bcubed-level-menu">Level Menu</button>
-            </div>
+  function loadGapi() {
+    var loaderScript = document.createElement('script');
+    var url = 'https://apis.google.com/js/api.js?checkCookie=1';
+    if (policy) {
+      loaderScript.src = policy.createScriptURL(url);
+    } else {
+      loaderScript.setAttribute('src', url);
+    }
+    loaderScript.onload = function() {
+      this.onload = function() {};
+      loadGapiClient();
+    };
+    loaderScript.onreadystatechange = function() {
+      if (this.readyState === 'complete') {
+        this.onload();
+      }
+    };
+    (document.head || document.body || document.documentElement).appendChild(loaderScript);
+  }
 
-            <div id="bcubed-menu" class="bcubed-visible">
-                <div id="bcubed-menu-scale">
-                    <div class="bcubed-page bcubed-level-won">
-                        <h1></h1>
-                        <p>Level Time: <span class="bcubed-level-won-time"></span></p>
-                        <div class="bcubed-level-completed">
-                            <p>Overall Time: <span class="bcubed-level-won-overall-time"></span></p>
-                            <p><button class="bcubed-next-level">Next Level</button></p>
-                        </div>
-                        <div class="bcubed-game-completed">
-                            <p>Final Time: <span class="bcubed-level-won-overall-time"></span></p>
-                            <p><button class="bcubed-click-here">Click Here</button></p>
-                        </div>
-                    </div>
+  function updateInnerFrame(url, enableInteraction, forceIosScrolling) {
+    var urlEl = document.createElement('a');
+    urlEl.setAttribute('href', url);
+    if (urlEl.protocol != "https:" && urlEl.protocol != "http:") {
+      // Do not allow updating the iframe's src to anything other than https or http (used for local
+      // servers), specifically javascript:
+      return;
+    }
+    var iframe = document.getElementById('innerFrame');
+    iframe.src = url;
+    iframe.onload = function() {
+      gapi.rpc.call('..', 'innerFrameLoaded');
+    };
 
-                    <div class="bcubed-page bcubed-level-list">
-                        <h1>Choose Level</h1>
-                        <ul></ul>
-                        <p><button class="bcubed-back">Back</button></p>
-                    </div>
+    if (enableInteraction) {
+      if (forceIosScrolling) {
+        var iframeParent = iframe.parentElement;
+        iframeParent.classList.add('forceIosScrolling');
+      } else {
+        iframe.style.overflow = 'auto';
+      }
+    } else {
+      iframe.style.pointerEvents = 'none';
+    }
+  }
 
-                    <div class="bcubed-page bcubed-game-won">
-                        <h1>Congratulations!</h1>
-                        <p>You have conquered every level!</p>
-                    </div>
+  function updateInnerIframeCode(userCode, enableInteraction, forceIosScrolling, enableHtmlSitesGenAi, isLiquidArtifact = false) {
+    if (enableHtmlSitesGenAi && isLiquidArtifact && enableInteraction) {
+      var innerFrame = document.getElementById('innerFrame');
+      if (innerFrame) {
+        innerFrame.style.pointerEvents = 'auto';
+        innerFrame.setAttribute('scrolling', 'auto');
+      }
+    }
+    gapi.rpc.setup('innerFrame');
+    gapi.rpc.call(
+      'innerFrame',
+      'updateUserHtmlFrame',
+      undefined /* opt_callback */,
+      userCode,
+      enableInteraction,
+      forceIosScrolling,
+      enableHtmlSitesGenAi,
+      isLiquidArtifact);
+  }
 
-                    <p class="bcubed-page bcubed-title bcubed-visible">
-                        <button class="bcubed-start">Play</button>
-                    </p>
-                </div>
+  function onPostMessage(ev) {
+    var innerFrame = document.getElementById('innerFrame');
+    if (ev.data['magic'] != 'SHIC' && (ev.data.type != 'ATARI_GENAI_TEXT_EDIT' || !innerFrame || ev.source !== innerFrame.contentWindow)) {
+      return;
+    }
+    var type = ev.data['type'];
+    switch (type) {
+      case 'resize':
+        var height = ev.data['height'];
+        gapi.rpc.call('..', 'resize', undefined /* opt_callback */, height);
+        break;
+      case 'ATARI_GENAI_TEXT_EDIT':
+        window.parent.postMessage(ev.data, '*');
+        break;
+    }
+  }
 
-                <button class="bcubed-page bcubed-game-won bcubed-back">Back</button>
-                <button class="bcubed-page bcubed-level-won bcubed-level-menu">Level Menu</button>
-            </div>
+  function onGapiInitialized() {
+    // Inform the parent frame that GAPI has been initialized.
+    gapi.rpc.call('..', 'gapiInitialized');
+    gapi.rpc.register('updateInnerFrame', updateInnerFrame);
+    gapi.rpc.register('updateInnerIframeCode', updateInnerIframeCode);
+    window.addEventListener('message', onPostMessage);
+  }
 
-            <p id="bcubed-options"><button id="bcubed-music-toggle"></button><button id="bcubed-sound-toggle"></button></p>
-        </div>
+  function loadGapiClient() {
+    gapi.load('gapi.rpc', onGapiInitialized);
+  }
 
-        <script src="scripts/bcubed.js"></script>
-    </body>
-</html>
+  if (document.readyState == 'complete') {
+    loadGapi();
+  } else {
+    self.addEventListener('load', loadGapi);
+  }
+</script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true" style="visibility: visible !important;"></grammarly-desktop-integration></html>
